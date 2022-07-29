@@ -1,0 +1,3 @@
+@types/shelljs
+shelljs
+supertest
