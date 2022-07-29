@@ -1,3 +1,4 @@
 @types/shelljs
 shelljs
 supertest
+@types/supertest
