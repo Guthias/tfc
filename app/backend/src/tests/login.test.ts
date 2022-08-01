@@ -29,7 +29,7 @@ describe('<POST /login>', () => {
           .send({
             password: 'secret_user',
           });
-        expect(result.body).to.equal({ message: 'All fields must be filled' })
+        expect(result.body.message).to.equal('All fields must be filled')
       });
     });
 
@@ -49,7 +49,7 @@ describe('<POST /login>', () => {
         .send({
           email: 'user@user.com',
         });
-        expect(result.body).to.equal({ message: 'All fields must be filled' })
+        expect(result.body.message).to.equal('All fields must be filled')
       });
     });
   })
