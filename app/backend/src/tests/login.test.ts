@@ -56,22 +56,59 @@ describe('<POST /login>', () => {
   })
 
   describe('Quando o formato dos dados estiverem corretos', () => {
-    let response: Response;
-
-    before(async () => {
-      response = await request(app).post('/login').send({
-        email: 'user@user.com',
-        password: 'secret_user'
-      })
-    })
-
     describe('Quando os dados estiverem corretos', () => {
-      it('Deve ter o status 400', () => {
+      let response: Response;
+  
+      before(async () => {
+        response = await request(app).post('/login').send({
+          email: 'user@user.com',
+          password: 'secret_user'
+        })
+      })
+      it('Deve ter o status 200', () => {
         expect(response.status).to.equal(200);
       })
 
       it('Deve conter um token', () => {
         expect(response.body.token).not.be.undefined;
+      })
+    })
+
+    describe('Quando o e-mail estiver incorreto', () => {
+      let response: Response;
+
+      before(async () => {
+        response = await request(app).post('/login').send({
+          email: 'user@invalid.com',
+          password: 'secret_user'
+        })
+      })
+
+      it('Deve ter o status 401', () => {
+        expect(response.status).to.equal(401);
+      })
+
+      it('Deve retornar a mensagem \"Incorrect email or password\"', () => {
+        expect(response.body.message).to.be('Incorrect email or password');
+      })
+    })
+
+    describe('Quando o e-mail estiver incorreto', () => {
+      let response: Response;
+
+      before(async () => {
+        response = await request(app).post('/login').send({
+          email: 'user@user.com',
+          password: 'secret_user'
+        })
+      })
+
+      it('Deve ter o status 401', () => {
+        expect(response.status).to.equal(401);
+      })
+
+      it('Deve retornar a mensagem \"Incorrect email or password\"', () => {
+        expect(response.body.message).to.be('Incorrect email or password');
       })
     })
   });
