@@ -8,13 +8,14 @@ const loginSchema = Joi.object({
 });
 
 const loginValidate = (req: Request, res: Response, next: NextFunction) => {
+  if (!req.body.email || !req.body.password) {
+    throw errorList.missingFields;
+  }
+
   const { error } = loginSchema.validate(req.body);
   if (error) {
-    const { type, message } = error.details[0];
-    if (type === 'any.required') {
-      throw errorList.missingFields;
-    }
-    return res.status(422).json({ message });
+    const { message } = error.details[0];
+    return res.status(400).json({ message });
   }
   next();
 }
