@@ -2,3 +2,5 @@
 shelljs
 supertest
 @types/supertest
+joi
+express-async-errors
