@@ -1,8 +1,10 @@
-import * as express from 'express';
+import { Router, Request, Response } from 'express';
 import LoginValidate from '../middlewares/LoginValidate';
+import { signInController } from '../useCases/SignIn';
 
-const routes = express.Router();
+const router = Router();
 
-routes.post('/', LoginValidate);
+router.post('/', LoginValidate, async (req: Request, res: Response) => signInController
+  .handle(req, res));
 
-export default routes;
+export default router;
