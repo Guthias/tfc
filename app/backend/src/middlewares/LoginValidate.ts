@@ -1,5 +1,6 @@
 import * as Joi from 'joi';
 import { NextFunction, Request, Response } from 'express';
+import errorList from '../helpers/errorsList';
 
 const loginSchema = Joi.object({
   email: Joi.string().email().required(),
@@ -11,9 +12,9 @@ const loginValidate = (req: Request, res: Response, next: NextFunction) => {
   if (error) {
     const { type, message } = error.details[0];
     if (type === 'any.required') {
-      return res.status(400).json({ message: 'All fields must be filled' });
+      throw errorList.missingFields;
     }
-    return res.status(400).json({ message });
+    return res.status(422).json({ message });
   }
   next();
 }
