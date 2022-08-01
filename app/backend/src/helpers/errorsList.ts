@@ -6,7 +6,7 @@ const errorList = {
 
   incorrectCredentials: {
     status: 401,
-    message: ''
+    message: 'Incorrect email or password'
   }
 }
 
