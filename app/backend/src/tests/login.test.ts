@@ -3,6 +3,7 @@ import * as chai from 'chai';
 import resetDatabase from './assets/resetDatabase';
 const request = require('supertest');
 import { app } from '../app';
+import { Response } from 'supertest';
 
 const { expect } = chai;
 
@@ -53,4 +54,25 @@ describe('<POST /login>', () => {
       });
     });
   })
+
+  describe('Quando o formato dos dados estiverem corretos', () => {
+    let response: Response;
+
+    before(async () => {
+      response = await request(app).post('/login').send({
+        email: 'user@user.com',
+        password: 'secret_user'
+      })
+    })
+
+    describe('Quando os dados estiverem corretos', () => {
+      it('Deve ter o status 400', () => {
+        expect(response.status).to.equal(200);
+      })
+
+      it('Deve conter um token', () => {
+        expect(response.body.token).not.be.undefined;
+      })
+    })
+  });
 });
