@@ -43,3 +43,5 @@ Users.init({
   modelName: 'Users',
   tableName: 'users',
 });
+
+export default Users;
