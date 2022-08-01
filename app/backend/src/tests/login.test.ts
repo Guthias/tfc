@@ -89,17 +89,17 @@ describe('<POST /login>', () => {
       })
 
       it('Deve retornar a mensagem \"Incorrect email or password\"', () => {
-        expect(response.body.message).to.be('Incorrect email or password');
+        expect(response.body.message).to.equal('Incorrect email or password');
       })
     })
 
-    describe('Quando o e-mail estiver incorreto', () => {
+    describe('Quando o password estiver incorreto', () => {
       let response: Response;
 
       before(async () => {
         response = await request(app).post('/login').send({
           email: 'user@user.com',
-          password: 'secret_user'
+          password: 'invalidPassword'
         })
       })
 
@@ -108,7 +108,7 @@ describe('<POST /login>', () => {
       })
 
       it('Deve retornar a mensagem \"Incorrect email or password\"', () => {
-        expect(response.body.message).to.be('Incorrect email or password');
+        expect(response.body.message).to.equal('Incorrect email or password');
       })
     })
   });
