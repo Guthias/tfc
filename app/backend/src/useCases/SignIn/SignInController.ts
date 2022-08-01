@@ -9,7 +9,7 @@ class signInController {
   async handle(req: Request, res: Response): Promise<Response> {
     const { email, password } = req.body;
 
-    const token = this.SignInUseCase.execute({ email, password });
+    const token = await this.SignInUseCase.execute({ email, password });
 
     return res.status(200).json({ token });
   }
