@@ -1,4 +1,4 @@
-import user from '../../entries/User';
+import user from '../../entities/User';
 import { IUsersRepository } from '../IUsersRepository';
 import Users from '../../database/models/UserModel';
 
