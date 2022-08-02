@@ -12,4 +12,15 @@ export default class SequelizeUsersRepository implements IUsersRepository {
 
     return foundUser as unknown as user;
   };
+
+  public getRoleById = async (id: number): Promise<user['role']> => {
+    const { role } = await Users.findOne({
+      attributes: ['role'],
+      where: { id },
+    }) as user;
+
+    if (!role) throw new Error('User doens\'t exist');
+
+    return role as user['role'];
+  };
 }
