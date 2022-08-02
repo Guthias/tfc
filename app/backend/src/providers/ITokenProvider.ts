@@ -1,9 +1,10 @@
-export interface tokenData {
+export interface ITokenData {
   id: number;
   email: string;
   username: string;
 }
 
 export interface ITokenProvider {
-  generateToken(tokenData: tokenData): string;
+  generateToken(tokenData: ITokenData): string;
+  decodeToken(token: string): ITokenData,
 }
