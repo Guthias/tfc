@@ -6,8 +6,8 @@ const errorList = {
 
   incorrectCredentials: {
     status: 401,
-    message: 'Incorrect email or password'
-  }
-}
+    message: 'Incorrect email or password',
+  },
+};
 
 export default errorList;
