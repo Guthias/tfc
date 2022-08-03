@@ -40,11 +40,12 @@ describe('<GET /login/validate>', () => {
       })
   
       it('Deve responder com o status 200', () => {
-        expect(response.status).to.equal(401);
+        expect(response.status).to.equal(200);
       })
 
       it('Deve informar a \"role\" corretamente', () => {
-        expect(response.body).to.equal({role: 'user'});
+        expect(response.body).to.have.property('role', 'user');
+        expect(Object.keys(response.body).length).to.equal(1);
       })
     })
 
@@ -63,11 +64,12 @@ describe('<GET /login/validate>', () => {
       })
   
       it('Deve responder com o status 200', () => {
-        expect(response.status).to.equal(401);
+        expect(response.status).to.equal(200);
       })
 
       it('Deve informar a \"role\" corretamente', () => {
-        expect(response.body).to.equal({role: 'admin'});
+        expect(response.body).to.have.property('role', 'admin');
+        expect(Object.keys(response.body).length).to.equal(1);
       })
     })
   })
