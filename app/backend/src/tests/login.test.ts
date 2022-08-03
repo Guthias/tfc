@@ -1,6 +1,5 @@
 import * as sinon from 'sinon';
 import * as chai from 'chai';
-import resetDatabase from './assets/resetDatabase';
 const request = require('supertest');
 import { app } from '../app';
 import { Response } from 'supertest';
@@ -8,11 +7,6 @@ import { Response } from 'supertest';
 const { expect } = chai;
 
 describe('<POST /login>', () => {
-  before(function() {
-    this.timeout(60000)
-    resetDatabase();
-  });
-
   describe('Quando o formato dos dados estiverem incorretos', () => {
     describe('Quando estiver faltando o e-mail', () => {
       it('Deve responder com o status 400', async () => {
