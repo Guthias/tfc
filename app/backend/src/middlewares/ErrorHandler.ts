@@ -1,9 +1,9 @@
 import { NextFunction, Request, Response } from 'express';
-import IHttpError from '../interfaces/IHttpError';
+import HttpError from '../errors/HttpError';
 
-const ErrorHandler = (err: IHttpError, _req: Request, res: Response, next: NextFunction) => {
+const ErrorHandler = (err: HttpError, _req: Request, res: Response, next: NextFunction) => {
   if (err) {
-    return res.status(err.status || 500).json({ message: err.message });
+    return res.status(err.statusCode || 500).json({ message: err.message });
   }
   next();
 };

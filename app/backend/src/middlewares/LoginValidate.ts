@@ -1,23 +1,25 @@
 import * as Joi from 'joi';
 import { NextFunction, Request, Response } from 'express';
-import errorList from '../helpers/errorsList';
+import HttpError from '../errors/HttpError';
 
 const loginSchema = Joi.object({
   email: Joi.string().email().required(),
-  password: Joi.string().min(6).required()
+  password: Joi.string().min(6).required(),
 });
 
 const loginValidate = (req: Request, res: Response, next: NextFunction) => {
   if (!req.body.email || !req.body.password) {
-    throw errorList.missingFields;
+    throw new HttpError(400, 'All fields must be filled');
   }
 
   const { error } = loginSchema.validate(req.body);
+
   if (error) {
     const { message } = error.details[0];
-    return res.status(400).json({ message });
+    throw new HttpError(400, message);
   }
+
   next();
-}
+};
 
 export default loginValidate;

@@ -1,7 +1,7 @@
 import { IUsersRepository } from '../../repositories/IUsersRepository';
 import { ISignInDTO } from './SignInDTO';
 import { ITokenProvider } from '../../providers/ITokenProvider';
-import errorsList from '../../helpers/errorsList';
+import HttpError from '../../errors/HttpError';
 import { IHashProvider } from '../../providers/IHashProvider';
 
 class signInUseCase {
@@ -14,11 +14,11 @@ class signInUseCase {
   async execute(data: ISignInDTO) {
     const user = await this.usersRepository.findByEmail(data.email);
 
-    if (!user) throw errorsList.incorrectCredentials;
+    if (!user) throw new HttpError(401, 'Incorrect email or password');
 
     const match = await this.hashProvider.comparePassword(data.password, user.password);
 
-    if (!match) throw errorsList.incorrectCredentials;
+    if (!match) throw new HttpError(401, 'Incorrect email or password');
 
     const token = this.tokenProvider.generateToken({
       id: user.id,
