@@ -7,4 +7,5 @@ export interface ITokenData {
 export interface ITokenProvider {
   generateToken(tokenData: ITokenData): string;
   decodeToken(token: string): ITokenData,
+  verifyToken(token: string): boolean,
 }

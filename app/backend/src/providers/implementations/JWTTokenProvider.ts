@@ -17,4 +17,13 @@ export default class JWtTokenProvider implements ITokenProvider {
     const tokenData = jwt.decode(token) as ITokenData;
     return tokenData;
   };
+
+  verifyToken(token: string): boolean {
+    try {
+      jwt.verify(token, this.secret);
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
 }
