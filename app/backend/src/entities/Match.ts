@@ -5,6 +5,6 @@ export default class Match {
   awayTeam: number;
   awayTeamGoals: number;
   inProgress: boolean;
-  teamHome: { teamName: string };
-  teamAway: { teamName: string };
+  teamHome?: { teamName: string };
+  teamAway?: { teamName: string };
 }
