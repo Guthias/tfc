@@ -21,10 +21,6 @@ Matches.init({
   homeTeam: {
     type: INTEGER,
     allowNull: false,
-    references: {
-      model: 'Teams',
-      key: 'id',
-    },
   },
   homeTeamGoals: {
     type: INTEGER,
@@ -33,10 +29,6 @@ Matches.init({
   awayTeam: {
     type: INTEGER,
     allowNull: false,
-    references: {
-      model: 'Teams',
-      key: 'id',
-    },
   },
   awayTeamGoals: {
     type: INTEGER,
@@ -54,7 +46,8 @@ Matches.init({
   underscored: true,
 });
 
-Matches.belongsTo(Teams, { as: 'homeTeam' });
-Matches.belongsTo(Teams, { as: 'awayTeam' });
+Matches.belongsTo(Teams, { as: 'teamHome', foreignKey: 'homeTeam' });
+Matches.belongsTo(Teams, { as: 'teamAway', foreignKey: 'awayTeam' });
+Teams.hasMany(Matches, { foreignKey: 'id' });
 
 export default Matches;
