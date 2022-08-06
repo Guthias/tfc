@@ -12,6 +12,7 @@ export default class CreateMatchUseCase {
       throw new HttpError(401, 'It is not possible to create a match with two equal teams');
     }
 
-    this.matchRepository.createMatch(data);
+    const createdMatch = await this.matchRepository.createMatch(data);
+    return createdMatch;
   }
 }
