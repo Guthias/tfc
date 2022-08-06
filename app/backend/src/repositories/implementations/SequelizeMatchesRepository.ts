@@ -1,6 +1,7 @@
-import { IMatchesRepository } from '../IMatchesRespository';
+import { IMatchesRepository, IMatchData } from '../IMatchesRespository';
 import Matches from '../../database/models/MatchesModel';
 import Teams from '../../database/models/TeamModel';
+import HttpError from '../../errors/HttpError';
 import Match from '../../entities/Match';
 
 export default class SequelizeMatchesRepository implements IMatchesRepository {
@@ -41,5 +42,20 @@ export default class SequelizeMatchesRepository implements IMatchesRepository {
     });
 
     return matches as unknown as Match[];
+  };
+
+  public createMatch = async (matchData: IMatchData) => {
+    try {
+      const createdMatch = await Matches.create({
+        homeTeam: matchData.homeTeam,
+        homeTeamGoals: matchData.homeTeamGoals,
+        awayTeam: matchData.awayTeam,
+        awayTeamGoals: matchData.awayTeamGoals,
+        inProgress: true,
+      });
+      return createdMatch as unknown as Match;
+    } catch (e) {
+      throw new HttpError(404, 'There is no team with such id!');
+    }
   };
 }
