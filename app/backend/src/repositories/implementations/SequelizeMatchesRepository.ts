@@ -5,7 +5,6 @@ import Match from '../../entities/Match';
 
 export default class SequelizeMatchesRepository implements IMatchesRepository {
   public getAllMatches = async () => {
-    console.log('entrou');
     const matches = await Matches.findAll({
       include: [
         {
