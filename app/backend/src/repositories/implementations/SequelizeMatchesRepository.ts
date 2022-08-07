@@ -58,4 +58,14 @@ export default class SequelizeMatchesRepository implements IMatchesRepository {
       throw new HttpError(404, 'There is no team with such id!');
     }
   };
+
+  public getMatchById = async (id: string): Promise<Match | null> => {
+    const match = await Matches.findOne({ where: { id } });
+
+    return match as unknown as Match;
+  };
+
+  public finishMatch = async (id: string): Promise<void> => {
+    await Matches.update({ inProgress: false }, { where: { id } });
+  };
 }

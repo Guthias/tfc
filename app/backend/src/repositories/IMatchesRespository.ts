@@ -11,4 +11,6 @@ export interface IMatchesRepository {
   getAllMatches(): Promise<Match[]>;
   getInProgressMatches(inProgress: boolean): Promise<Match[]>
   createMatch(data: IMatchData): Promise<Match>
+  getMatchById(id: string): Promise<Match | null>
+  finishMatch(id: string): Promise<void>
 }
