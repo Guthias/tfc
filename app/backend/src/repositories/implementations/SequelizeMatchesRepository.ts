@@ -68,4 +68,11 @@ export default class SequelizeMatchesRepository implements IMatchesRepository {
   public finishMatch = async (id: string): Promise<void> => {
     await Matches.update({ inProgress: false }, { where: { id } });
   };
+
+  public updateMatchScore = async (id: string, homeTeamGoals: number, awayTeamGoals: number) => {
+    await Matches.update(
+      { homeTeamGoals, awayTeamGoals },
+      { where: { id } },
+    );
+  };
 }

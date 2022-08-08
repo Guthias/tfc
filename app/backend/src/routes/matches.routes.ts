@@ -3,6 +3,7 @@ import { getMatchesController } from '../useCases/GetMatches';
 import { createMatchController } from '../useCases/CreateMatch';
 import AuthVerify from '../middlewares/AuthVerify';
 import { finishMatchController } from '../useCases/FinishMatch';
+import { updateMatchScoreController } from '../useCases/UpdateMatchScore';
 
 const router = Router();
 
@@ -18,6 +19,11 @@ router.post(
 router.patch(
   '/:id/finish',
   async (req: Request, res: Response) => finishMatchController.handle(req, res),
+);
+
+router.patch(
+  '/:id/',
+  async (req: Request, res: Response) => updateMatchScoreController.handle(req, res),
 );
 
 export default router;

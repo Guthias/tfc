@@ -13,4 +13,5 @@ export interface IMatchesRepository {
   createMatch(data: IMatchData): Promise<Match>
   getMatchById(id: string): Promise<Match | null>
   finishMatch(id: string): Promise<void>
+  updateMatchScore(id: string, homeTeamGoals: number, awayTeamGoals: number): Promise<void>
 }
